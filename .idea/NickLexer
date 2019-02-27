@@ -1,0 +1,18 @@
+import java.io.FileReader
+import java.awt.Desktop
+import java.io.File
+
+public enum TokenTypes {Symbol, Reservedw, Constant, Identifier}
+
+public class Token {
+  public String Lexeme;
+  public TokenTypes Type;
+
+  public Token() {
+    this(null, null);
+  }
+}
+
+class Lexer {
+
+}
