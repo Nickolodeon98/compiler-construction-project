@@ -7,7 +7,7 @@ import java.io.IOException;
 
 class NickLexer {
   private BufferedReader current;
-  private char[] array;
+//  private char[] array;
   private int lineNumber;
 
   public static enum TokenTypes {
@@ -42,7 +42,7 @@ class NickLexer {
     return true;
   }
 
-  public void readFile(int offset, int length) {
+  public void readFile(char[] array, int offset, int length) {
     try {
       current.read(array, offset, length);
     } catch (IOException error) {
@@ -60,7 +60,7 @@ class NickLexer {
     }
   }
 
-  public Token NextToken()
+  public Token NextToken(char[] array)
   {
     char start;
     Token word = new Token();
@@ -69,13 +69,14 @@ class NickLexer {
     try { for( char i : array ) {
       while (Character.isWhitespace(i)) {
         skipped = skipped + current.skip(1); //skip the character of white space
+        }
+        start = i;
+        if (Character.isLetter(start) == true) {
+          word.Type = TokenTypes.Reservedw;
+//        System.out.println("This is Reservedw");
+        }
+        else System.out.println("Hello!");
       }
-      start = i;
-      if (Character.isLetter(start) == true) {
-        word.Type = TokenTypes.Reservedw;
-        System.out.println("This is Reservedw");
-      }
-    }
     } catch (IOException error) {
       System.out.println(error.getMessage());
     }
@@ -86,17 +87,21 @@ class NickLexer {
     char[] myArray;
     myArray = new char[100];
     int i;
+    Token myToken;
 
     System.out.println("Hello Java");
     NickLexer myLexer = new NickLexer();
     boolean judge = myLexer.init("samplecode.cs");
     System.out.println(judge);
-    myLexer.readFile(0, 100);
+    myLexer.readFile(myArray, 0, 100);
     // myLexer.closeFile();
-    Token token = myLexer.NextToken();
-    System.out.println(token.Type);
     for(i = 0; i < 100; i++) {
       System.out.println(myArray[i]);
     }
+
+    myToken = myLexer.NextToken(myArray);
+    System.out.println("Hello");
+//    System.out.println(myToken);
+    if (myToken.Type != TokenTypes.Reservedw) System.out.println("This is a reserved word");
   }
 }
