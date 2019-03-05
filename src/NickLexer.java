@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+
 class NickLexer {
   private BufferedReader current;
   private char[] array;
@@ -67,12 +68,11 @@ class NickLexer {
 
     try { for( char i : array ) {
       while (Character.isWhitespace(i)) {
-        skipped = skipped + current.skip(1);
+        skipped = skipped + current.skip(1); //skip the character of white space
       }
       start = i;
-      if (start instanceof char) {
-
-        word.Type = Reservedw;
+      if (Character.isLetter(start) == true) {
+        word.Type = TokenTypes.Reservedw;
         System.out.println("This is Reservedw");
       }
     }
@@ -83,8 +83,8 @@ class NickLexer {
   }
 
   public static void main(String[] args) {
-//    char[] myArray;
-//    myArray = new char[100];
+    char[] myArray;
+    myArray = new char[100];
     int i;
 
     System.out.println("Hello Java");
@@ -95,8 +95,8 @@ class NickLexer {
     // myLexer.closeFile();
     Token token = myLexer.NextToken();
     System.out.println(token.Type);
-//    for(i = 0; i < 100; i++) {
-//      System.out.println(myArray[i]);
-//    }
+    for(i = 0; i < 100; i++) {
+      System.out.println(myArray[i]);
+    }
   }
 }
