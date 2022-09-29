@@ -1,2 +1,2 @@
 # first-maze-game
-My first c language maze game implementation with Super Mario character.
+My first construction of actual compiler using C language.
